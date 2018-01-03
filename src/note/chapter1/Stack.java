@@ -1,6 +1,7 @@
 package note.chapter1;
 import std.StdIn;
 import std.StdOut;
+import java.util.Iterator;
 
 /**
  * Created by Beta_Su on 2018/1/2.
@@ -46,4 +47,20 @@ public class Stack<Item> implements Iterable<Item>{
           }
           StdOut.println("(" + s.size() + "left on stack)");
       }
+    public Iterator<Item> iterator() {
+        return new ListIterator();
+    }
+    private class ListIterator implements Iterator<Item> {
+        private Node current = first;
+        public boolean hasNext() {
+            return current != null;
+        }
+        public void remove () {}
+        public Item next() {
+            Item item = current.item;
+            current = current.next;
+            return item;
+        }
+    }
+
 }
