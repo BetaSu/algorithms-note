@@ -5,20 +5,21 @@ import std.StdOut;
 
 /**
  * Created by Beta_Su on 2018/1/7.
- * 选择排序
- * 对于长度为N的数组，需要大约N^2/2次比较和N次交换
- * 特点：运行时间与输入无关，数据移动是最少的。
+ * 插入排序
+ * 对于长度为N且主键不重复的数组，平均情况需要~N^2/4次比较以及~ N^2/4次交换
+ * 最坏情况需要 ~N^2/2次比较和 ~N^2/2次交换
+ * 最好情况需要 N-1 次比较和 0 次交换
+ * 特点：时间取决于输入中元素的初始顺序
  */
-public class Selection {
+public class Insertion {
     public static void sort(Comparable[] a) {
+        // 将a[]按升序排列
         int N = a.length;
-        for (int i = 0; i< N; i++) {
-            // 将a[i]与a[i+1..N]中最小的元素交换
-            int min = i;
-            for (int j = i+1; j < N; j++) {
-                if (less(a[j], a[min])) min = j;
+        for (int i = 1; i < N; i++) {
+            // 将a[i]插入到a[i-1],a[i-2],a[i-3]...中
+            for (int j = i; j > 0 && less(a[j], a[j - 1]); j--) {
+                exch(a, j, j-1);
             }
-            exch(a, i, min);
         }
     }
 
